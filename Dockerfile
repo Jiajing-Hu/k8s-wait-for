@@ -13,10 +13,12 @@ LABEL org.label-schema.vcs-ref=$VCS_REF \
 
 ENV KUBE_LATEST_VERSION="v1.18.1"
 
-RUN apk add ca-certificates curl jq \
- && curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBE_LATEST_VERSION}/bin/linux/arm64/kubectl -o /usr/local/bin/kubectl \
- && chmod +x /usr/local/bin/kubectl \
- && rm /var/cache/apk/*
+RUN apk add ca-certificates 
+RUN apk add curl 
+RUN apk add jq
+RUN curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBE_LATEST_VERSION}/bin/linux/arm64/kubectl -o /usr/local/bin/kubectl
+RUN chmod +x /usr/local/bin/kubectl 
+RUN rm /var/cache/apk/*
 
 ADD wait_for.sh /usr/local/bin/wait_for.sh
 
